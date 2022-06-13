@@ -1,11 +1,17 @@
-import React, {useState} from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, {useState, useEffect} from "react";
+import { View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import Torch from "react-native-torch";
 
 const App = () =>{
   const [toggle, setToggle] = useState(false); //false
 
   const handleChangeToggle = ()=> setToggle(oldToggle => !oldToggle);
-  //if toggle return light
+
+  useEffect(() => {
+    // Liga flash do celular
+    Torch.switchState(toggle);
+  }, [toggle]);
+
   return <View style={toggle ? style.containerLight : style.container}>
     <TouchableOpacity onPress={handleChangeToggle}>
       <Image
